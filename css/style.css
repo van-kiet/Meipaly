@@ -1,0 +1,527 @@
+/* body {
+    font-family: 'Oswald', sans-serif;
+}
+
+html {
+    font-family: 'Oswald', sans-serif;
+} */
+
+/* GLOBAL */
+/* viết rút gọn */
+/* thẻ root => thẻ html */
+html,
+body {
+  font-family: "Oswald", sans-serif;
+
+  /* 1rem = 18px */
+  /* font-size: 30px; */
+  /* nếu không khai báo font-size thì mặc định 1rem =16px */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.section--padding {
+  padding: 100px 0;
+}
+
+/* HEADER */
+header {
+  /* background-color: #000; */
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* do thẻ có thuốc tính position absolute nên mất kích thước, do đó phải thêm width  */
+  width: 100%;
+  border-bottom: 1px solid #888888;
+}
+
+/* flex, flexbox: CSS3 (dễ dùng, không có tác dụng phụ như float)
+
+Quy định flex: khai báo flex ở thẻ cha gần nhất các thẻ con cần sắp xếp
+*/
+
+.header__content {
+  /* căn giữa nội dung chính/lớn, chỉ áp dụng cho chiều ngang với width < 100% + margin: auto */
+  margin: auto;
+  width: 75%;
+
+  /* background-color: brown; */
+
+  display: flex;
+  /* justify-content: điều kiện thì thẻ cha flex phải còn vùng trống
+    justify-content: canh chỉnh nội dung theo chiều ngang */
+  justify-content: space-between;
+  /* align-items: canh chỉnh theo chiều dọc */
+  align-items: center;
+
+  padding: 20px 0;
+}
+
+/* header li */
+.header__content li {
+  list-style: none;
+  display: inline;
+}
+
+/* logo: 2rem */
+/* rem: font-size, chỉ có nội dung chữ dùng fs dùng rem thì margin, padding mới dùng rem */
+/* 10 + 1 = 11 */
+.header__content a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-right: 10px;
+  /* viết in */
+}
+
+/* C1: 10 + 10 = 20 */
+.header__content .header__logo {
+  /* 1rem = 18px
+    1.78rem = 32px */
+  /* nhược điểm: phải tính toán kích thước chữ => quá trình build sẽ bị chậm đi */
+  /* font-size: 32px; */
+  font-size: 1.78rem;
+}
+.header li a:hover {
+  color: red;
+  transition: all 0.5s;
+}
+/* C2:  */
+/* gọi các thẻ a là con gần nhất (trực tiếp) của thẻ .header__content */
+/* .header__content>a {
+    font-size: 32px;
+} */
+
+/* CAROUSEL */
+.carousel {
+  background-image: url(../images/home_slider.jpg);
+  height: 700px;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  text-align: center;
+
+  /*c1 canh giữa với flex, 1 thẻ con 
+    canh giữa nội dung theo chiều dọc và chiều ngang
+    */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+/* trước hover (chưa di chuyển chuột vào) */
+.carousel__content button {
+  padding: 15px 25px;
+  background-color: #e62b4a;
+  color: white;
+  border: 1px solid #e62b4a;
+  cursor: pointer;
+
+  /* transition */
+  /* transition-property: thuộc tính cần thay đổi */
+  /* transition-property: background-color; */
+  /* transition-duration: khoảng thời gian thay đổi từ từ những hiệu ứng */
+  /* transition-delay: độ chờ của hiệu ứng chuyển đổi */
+  /* ms, s. 1s = 1000ms */
+  /* transition-delay: 5s; */
+  /* transition: all 0.5s; */
+
+  transition: all 0.5s;
+}
+.carousel__icon {
+  font-size: 3rem;
+
+  /* animation hiệu ứng mũi tên tự chạy */
+  /* animation: name duration timing-function delay iteration-count direction fill-mode;
+
+name tên hiệu ứng tên chu kì, tên keyframe
+-duration: quãng thời gian mà keyframe thực hiện 1 chu kì
+- timing-function:quy định tốc độ nhanh chậm trong 1 chu kì. vd lúc đầu nhanh lúc cuối chậm.
+-delay: độ trễ của hiêu ứng 
+_iteration-count: số lần lặp lại của 1 chu kì infinite là vo tận
+-direction và fill-mode: tạo hiệu ứng ngược lại từ to --> đến from */
+  animation: upDown 2s linear infinite;
+}
+
+/* #af2239 */
+/* sau hover (sau khi di chuyển chuột) */
+.carousel__content button:hover {
+  /* background-color: #af2239; */
+  background-color: #b76875;
+}
+
+/* SERVICES */
+.services {
+  background-color: black;
+}
+.services__content {
+  width: 75%;
+  margin: 0 auto;
+}
+.services__item {
+  background-color: white;
+  text-align: center;
+  width: 214px;
+  height: 230px;
+  margin: 0 10px;
+
+  position: relative;
+}
+/* đổi màu nút chấm */
+.services__content .slick-dots li.slick-active button:before {
+  color: #e62b4a;
+}
+.services__content .slick-dots li button:before {
+  color: white;
+  font-size: 15px;
+}
+/* before, ::after
+giúp ttạo những thẻ con html thông qua css
+-giúp tạo đường gạch tạo hiệu ứng hover trên giao diện
+-Quy định phải có content mới hiển thị before */
+/* .services__item p:after{
+    content: 'hêhe';
+    color: #000;
+}
+.services__item p:before{
+    content: 'hehe';
+    color: #000;
+} */
+/* trước hover  */
+.services__item::before {
+  content: "";
+  width: 5px;
+
+  background-color: #e62b4a;
+  /* before, after là loại inline, đổi loại thẻ mới xét kích thước width height đươc  */
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  height: 0;
+}
+/* sau hover  */
+.services__item:hover::before {
+  height: 100%;
+  transition: all 0.5s;
+}
+.services__content .services__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #888888;
+}
+.services__item i {
+  font-size: 3rem;
+}
+.services .title h2 {
+  color: white;
+}
+/* BLOG */
+.blog__content {
+  display: grid;
+  /* khai báo khi kích thướt các hàng bằng nhau */
+  /* grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 200px 30px 200px 40px;
+    grid-template-columns: repeat(4, 25%); */
+  /* fr: đơn vị chỉ dùng cho thằng grid */
+  /* repeat(4, 1fr): 1fr: mỗi cột có kích thước 1/4 */
+  /* repeat(3, 1fr): 1fr: mỗi cột có kích thước 1/3 */
+  grid-template-columns: repeat(4, 1fr);
+
+  /* khai báo hàng khi các hàng có kích thướt khác nhau */
+  /* grid-template-rows: ; */
+
+  /* có thể dùng padding để thêm khoảng cách, nhưng riêng vs grid có 1 thuộc tính là gap giúp canh khoảngcách các thẻ con trong thẻ cha, nó chỉ thêm giữa những mặt tiếp xúc của các thẻ con */
+  gap: 30px;
+
+  /* canh giữa nội dung chính theo chiều ngang */
+  width: 75%;
+  margin: auto;
+}
+.title {
+  text-align: center;
+}
+.title p:first-of-type {
+  color: #888888;
+  font-weight: 400;
+  font-size: 14px;
+}
+.title p:last-of-type {
+  font-size: 16px;
+  color: #888888;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.title h2 {
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+.blog__item1 {
+  /*C1: đường bắt đầu / span số cột cần chiếm */
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 2;
+
+  /* C2: đường bắt đầu / đường kết thúc */
+  /* grid-column: 1 / 3;
+    grid-row: 1 / 3; */
+}
+
+.blog__item10 {
+  grid-column: 3 / 5;
+  grid-row: 3 / 5;
+}
+
+.blog__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* issue: ảnh sản phẩm bị kéo dãn theo khung thẻ cha
+    cách giải quyết
+    C1: bg-img
+    bacdground-size: cover
+
+    C2: img
+    object-fit: cover; */
+  /* khi nào dùng img hoặc bg
+    -bg: phạm vi sử dụng lớn, kích thước vùng phủ lớn, công dụng làm đẹp trang web, không cần SEO
+    -img: ảnh cần được SEO (nhờ thuộc tính alt), phạm vi kích thước nhỏ, các ảnh lưu trữ ở BE(ảnh KH, ảnh sp, thông tin người dùng) */
+
+  /* tạo hình trắng đen */
+  filter: grayscale(50%) contrast(50%);
+}
+
+.blog__item {
+  position: relative;
+
+  /* overflow: che đi phần nội dung con tràn ra bên ngoài border thẻ cha */
+  overflow: hidden;
+}
+
+.blog__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background-color: rgba(230, 43, 74, 0.7);
+  width: 100%;
+  height: 100%;
+
+  color: yellow;
+}
+
+.blog__icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.blog__text {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+.blog__text p {
+  color: #d0c7c8;
+}
+
+.blog__text h3 {
+  color: white;
+}
+/* trước hover */
+.blog__item .blog__icon {
+  transform: translateY(30px);
+  transition: all 0.5s;
+}
+
+/* sau hover */
+/* C1: */
+/* .blog__item:hover .blog__icon {
+    transform: translateY(0);
+} */
+
+/* C2: */
+.blog__overlay:hover .blog__icon {
+  transform: translateY(0);
+}
+
+/* trước hover */
+.blog__item .blog__text {
+  transform: translateY(30px);
+  transition: all 0.5s;
+}
+
+/* sau hover */
+.blog__item:hover .blog__text {
+  transform: translateY(0);
+}
+
+/* trước hover */
+.blog__overlay {
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.blog__item:hover .blog__overlay {
+  opacity: 1;
+}
+.blog__icon i {
+  padding: 10px 10px;
+  background-color: white;
+  color: black;
+  font-size: 0.8rem;
+}
+
+/* NUMBER */
+.number {
+  background-color: black;
+}
+.number__content {
+  display: flex;
+  justify-content: space-between;
+
+  color: white;
+  text-align: center;
+
+  margin: 0 auto;
+  width: 75%;
+}
+/* tìm thẻ p đầu tiên của number__item  */
+.number__item p:first-of-type {
+  font-size: 3rem;
+}
+.number__item p:last-of-type {
+  font: 1.2rem;
+  color: #888888;
+}
+
+/* xử lí rung lắc nội dung bên trong  */
+.number__item {
+  width: 25%;
+}
+
+/* EXP  */
+.exp {
+  background-image: url(../images/bussiness_img_1.jpg);
+  background-size: cover;
+  background-position: center;
+  /* cố định hình nền bg  */
+  background-attachment: fixed;
+}
+.exp__content {
+  margin: 0 auto;
+  width: 75%;
+  /* background-color: white; */
+}
+.exp__content video {
+  width: 100%;
+}
+
+/* CONTACT */
+.contact__content {
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+}
+.contact__map {
+  width: 60%;
+}
+.contact__form {
+  width: 40%;
+}
+.contact__map iframe {
+  width: 100%;
+}
+.contact__form form {
+  display: flex;
+  flex-direction: column;
+  /* tăng chiều cao cho thẻ con thì mới sử dụng justify đc  */
+  justify-content: space-between;
+  height: 100%;
+  padding-left: 10px;
+  padding-bottom: 7px;
+}
+
+.contact__form input,
+.contact__form button {
+  font-size: 15px;
+  padding: 1em;
+}
+.submit {
+  color: white;
+  width: 100px;
+  background: #b76875;
+  cursor: pointer;
+  border: 1px solid #b76875;
+}
+/* Keyframe */
+/* giúp khai báo trạng thái chuyển động của 1 chu kì 1 lần chuyển động, 1 lần chu kì */
+@keyframes upDown {
+  /* c1 điểm bắt đầu, điểm kết thúc from-to */
+  from {
+    transform: translateY(0);
+    /* có icon */
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100px);
+    /* aan icon  */
+    opacity: 0;
+  }
+}
+
+/* c2 điểm bắt đầu, điểm giữa, điểm kết thúc 0-100% */
+@keyframes upDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+    /* rotate(0deg); */
+  }
+  35% {
+    transform: translateY(35px);
+    /* rotate(180deg); */
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 0;
+    /* rotate(360deg); */
+  }
+}
+
+/* BACK TO TOP  */
+.backtotop {
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
+  background-color: #888888;
+  color: aliceblue;
+  display: block;
+  font-size: 1.5rem;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  /* ẩn nut back to top  */
+  visibility: hidden;
+  opacity: 0;
+}
+/* hiện nút bach to top  */
+.cd-top--is-visible {
+  /* // back-to-top button visible */
+  /* visibility ngăn người dung tab dô để ko bị bay lên trển */
+  visibility: visible;
+  opacity: 1;
+}
